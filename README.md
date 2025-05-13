@@ -1,1 +1,1 @@
-Man！what canI say，manba out
+sekai ichi kawaii
