@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 3cd55de0fc33d52458f623e0218f1a4d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - mainCamera: {instanceID: 0}
+  - reflectionCamera: {instanceID: 0}
+  - reflectionRT: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
