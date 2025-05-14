@@ -17,7 +17,7 @@ Shader "Custom/FlowShader"
         
         _UJump("U Jump", Range(-0.25, 0.25)) = 0.25
         _VJump("V Jump", Range(-0.25, 0.25)) = 0.25
-        _Tiling("Tiling", Range(0, 30)) = 1
+        _Tiling("Tiling", Range(0, 100)) = 1
         _FlowSpeed("Flow Speed", Range(0, 1)) = 0.5
         _FlowStrength("Flow Strength", Range(0, 2)) = 0.5
         _FLowOffest("Flow Offset", Range(-1, 1)) = 0.5
@@ -33,6 +33,10 @@ Shader "Custom/FlowShader"
         _WaveA("Wave A(dir, steepness, wvaelength)", Vector) = (1, 0, 0.5, 10)
         _WaveB ("Wave B", Vector) = (0,1,0.25,20)
         _WaveC ("Wave C", Vector) = (1,1,0.15,10)
+
+        [Space(10)]
+        _FoamTex("Foam Texture", 2D) = "white" {}
+        _FoamScale("Foam Scale", Range(0, 1)) = 0.5
     }
 
     SubShader
@@ -63,10 +67,12 @@ Shader "Custom/FlowShader"
             
 
             
-            
+             
             #include "LookThroughWater.hlsl"    
             #include "FlowRenderCore.hlsl"
+            #include "Foaming.hlsl"
             #include "myFlowCore.hlsl"
+            
 
             
             ENDHLSL

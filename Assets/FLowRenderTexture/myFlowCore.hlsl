@@ -43,6 +43,7 @@ CBUFFER_START(UnityPerMaterial)
     float _Blend;
     float _Distortion;
     float4 _SunColor;
+    float _FoamScale;
 CBUFFER_END
 
 TEXTURE2D (_MainTex);
@@ -51,6 +52,7 @@ SAMPLER(sampler_MainTex);
 sampler2D _FlowMap;
 sampler2D _DerivHeightMap;
 sampler2D _ReflectionTex;
+sampler2D _FoamTex;
 
 
 Varyings vert(Attributes input)
@@ -181,13 +183,15 @@ half4 frag(Varyings input) : SV_Target
     float roughness = _Roughness*_Roughness;
     float squareRoughness = roughness*roughness;
 
+    float2 screenUV = input.positionHCS.xy * (_ScreenParams.zw - 1);
+
 
     //基础颜色
     float3 texA = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uvwA.xy).rgb* uvwA.z;
     float3 texB = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uvwB.xy).rgb* uvwB.z;
     //float3 Albedo = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, input.uv).rgb*_BaseColor;
     float3 Albedo = _BaseColor.rgb*(texA+texB);
-    //float3 Albedo = ColorBelowWater(input.screenPos);
+    //float3 Albedo = ColorBelowWater(screenUV,input.screenPos);
     //Albedo = float3(1,1,1);
     
 
@@ -250,8 +254,19 @@ half4 frag(Varyings input) : SV_Target
     float2 offset = normal.xy*_Distortion;
 
     float3 ReflectionColor = tex2Dlod(_ReflectionTex,float4(( input.screenPos.x / input.screenPos.w + offset.x/input.screenPos.w ),(input.screenPos.y / input.screenPos.w - offset.y/input.screenPos.w),0,0)).rgb;
+    
     finalColor = lerp(finalColor,ReflectionColor,_Blend);
-    return float4(finalColor,1);
+
+
+    //白沫
+    float foamAtten = GetFoamAtten(input.positionWS,screenUV + normal.xz * 0.1,_FoamScale,input.screenPos);
+    //为白沫贴图增加UV扰动
+    float2 foamUV = (input.uv + time * float2(0.01,0.01) + normal.xz * 0.005) * 30;
+    float foamDiffuse = tex2Dlod(_FoamTex,float4(foamUV,0,0)).r;
+    half3 foamTerm = foamDiffuse;
+    
+    finalColor = lerp(finalColor,foamTerm,foamAtten*foamDiffuse);
+    return float4(finalColor,1.0);
 }
 
 

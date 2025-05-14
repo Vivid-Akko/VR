@@ -3,9 +3,10 @@
 
 sampler2D _CameraDepthTexture;
 
-float ColorBelowWater(float4 screenPos)
+float ColorBelowWater(float2 screenUV, float4 screenPos)
 {
-    float2 uv = screenPos.xy / screenPos.w; // 将屏幕坐标转换为 UV
+    // 计算屏幕空间的深度值
+    float2 uv = screenUV;
     float depth = tex2D(_CameraDepthTexture, uv).r; // 提取深度值 (r 通道)
 
     // 将深度值从非线性空间转换为线性空间
@@ -19,8 +20,7 @@ float ColorBelowWater(float4 screenPos)
 
     // 返回标准化的深度差值
     return depthDifference / 20.0;
-
-
 }
+
 
 #endif
