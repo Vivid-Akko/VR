@@ -252,7 +252,7 @@ class VolumetricCloudsEditor : VolumeComponentEditor
 
         PropertyField(m_Enable);
 
-    #if URP_PBSKY
+#if URP_PBSKY
         var stack = VolumeManager.instance.stack;
         VisualEnvironment visualEnvVolume = stack.GetComponent<VisualEnvironment>();
         bool hasVisualEnvVolume = visualEnvVolume != null && visualEnvVolume.IsActive() && visualEnvVolume.skyType.value != 0;
@@ -262,10 +262,10 @@ class VolumetricCloudsEditor : VolumeComponentEditor
         {
             PropertyField(m_LocalClouds);
         }
-    #else
+#else
         bool hasVisualEnvVolume = false;
         PropertyField(m_LocalClouds);
-    #endif
+#endif
 
         bool hasCloudMap = CloudsShapeUI(hasVisualEnvVolume);
 
@@ -276,7 +276,7 @@ class VolumetricCloudsEditor : VolumeComponentEditor
             using (new IndentLevelScope())
             {
                 //if (hasCloudMap)
-                    //PropertyField(m_CloudMapSpeedMultiplier);
+                //PropertyField(m_CloudMapSpeedMultiplier);
                 PropertyField(m_ShapeSpeedMultiplier);
                 PropertyField(m_ErosionSpeedMultiplier);
             }
@@ -336,10 +336,10 @@ class VolumetricCloudsEditor : VolumeComponentEditor
         }
     }
     void LoadPresetValues(VolumetricClouds.CloudPresets preset, bool microDetails)
+    {
+        switch (preset)
         {
-            switch (preset)
-            {
-                case VolumetricClouds.CloudPresets.Sparse:
+            case VolumetricClouds.CloudPresets.Sparse:
                 {
                     m_DensityMultiplier.value.floatValue = 0.4f;
                     if (microDetails)
@@ -369,7 +369,7 @@ class VolumetricCloudsEditor : VolumeComponentEditor
                     m_AltitudeRange.value.floatValue = 1000.0f;
                 }
                 break;
-                case VolumetricClouds.CloudPresets.Cloudy:
+            case VolumetricClouds.CloudPresets.Cloudy:
                 {
                     m_DensityMultiplier.value.floatValue = 0.4f;
 
@@ -400,7 +400,7 @@ class VolumetricCloudsEditor : VolumeComponentEditor
                     m_AltitudeRange.value.floatValue = 2000.0f;
                 }
                 break;
-                case VolumetricClouds.CloudPresets.Overcast:
+            case VolumetricClouds.CloudPresets.Overcast:
                 {
                     m_DensityMultiplier.value.floatValue = 0.3f;
 
@@ -431,7 +431,7 @@ class VolumetricCloudsEditor : VolumeComponentEditor
                     m_AltitudeRange.value.floatValue = 2500.0f;
                 }
                 break;
-                case VolumetricClouds.CloudPresets.Stormy:
+            case VolumetricClouds.CloudPresets.Stormy:
                 {
                     m_DensityMultiplier.value.floatValue = 0.35f;
 
@@ -462,10 +462,10 @@ class VolumetricCloudsEditor : VolumeComponentEditor
                     m_AltitudeRange.value.floatValue = 5000.0f;
                 }
                 break;
-                default:
-                    break;
-            }
+            default:
+                break;
         }
+    }
 
     void SimpleControlMode(bool controlChanged)
     {
@@ -606,15 +606,15 @@ class VolumetricCloudsEditor : VolumeComponentEditor
         // Additional properties
         PropertyField(m_ShapeOffset);
 
-    #if URP_PBSKY
+#if URP_PBSKY
         if (hasVisualEnvVolume) { EditorGUILayout.HelpBox(k_EarthCurvatureMessage, MessageType.Info, wide: true);}
         using (new EditorGUI.DisabledScope(hasVisualEnvVolume))
         {
             PropertyField(m_EarthCurvature);
         }
-    #else
+#else
         PropertyField(m_EarthCurvature);
-    #endif
+#endif
 
         // For the other sections
         return hasCloudMap;
@@ -636,10 +636,10 @@ class VolumetricCloudsEditor : VolumeComponentEditor
 
             if (asset == null)
                 return null;
- 
+
             if (RenderDataListFieldInfo == null)
                 return null;
- 
+
             var renderDataList = (ScriptableRendererData[])RenderDataListFieldInfo.GetValue(asset);
             return renderDataList;
         }

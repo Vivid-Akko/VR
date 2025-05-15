@@ -4,6 +4,7 @@ Shader "PostShader" {
 
 
         _FogColor("FogColor",Color) = (0,0,0,0)
+        _SkyFogColor("SkyFogColor",Color) = (0,0,0,0)
         _FogDensity("FogDensity",Range(0,10)) = 0.1
         _FogHeightRange("FogHeightRange",Vector) = (0,100,0,0)
         
@@ -26,6 +27,7 @@ Shader "PostShader" {
 
             half _PixelSize;
             half4 _FogColor;
+            half4 _SkyFogColor;
             
 
             sampler2D _CameraDepthTexture;
@@ -164,8 +166,15 @@ Shader "PostShader" {
                 
                 
                     fog = saturate(depth*pow(2,_FogDensity));
-                    fog = fog/5;
-                    col = lerp (col, _FogColor , fog);
+                    if (depth > 0.9) {
+                        fog = fog/5;
+                        FogColor = _SkyFogColor;
+                    }
+                    else{
+                        fog = fog/2;
+                        FogColor = _FogColor;
+                    }
+                    col = lerp (col, FogColor , fog);
 
                 
                
