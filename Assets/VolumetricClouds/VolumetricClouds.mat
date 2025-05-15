@@ -121,7 +121,7 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _CloudNearPlane: 1198.1252
+    - _CloudNearPlane: 994.21014
     - _Cull: 2
     - _Cutoff: 0.5
     - _DensityMultiplier: 0.181202
@@ -138,7 +138,7 @@ Material:
     - _ErosionScale: 75
     - _Exposure: 1.3
     - _FadeInDistance: 500
-    - _FadeInStart: 0.01
+    - _FadeInStart: 0.6957358
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -174,7 +174,7 @@ Material:
     - _SunSize: 0.04
     - _SunSizeConvergence: 5
     - _Surface: 0
-    - _VerticalErosionWindDisplacement: -0.27664575
+    - _VerticalErosionWindDisplacement: -0.7073257
     - _VerticalShapeNoiseOffset: 1.21
     - _VerticalShapeWindDisplacement: 0
     - _WorkflowMode: 1
