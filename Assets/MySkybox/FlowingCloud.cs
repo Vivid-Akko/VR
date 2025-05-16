@@ -33,7 +33,7 @@ public class FlowingCloud : MonoBehaviour
             // 控制 shapeOffset 和 earthCurvature
             volumetricClouds.shapeOffset.value = new Vector3(
                 0f,
-                Time.time * 0.5f * 0.005f,
+                Time.time * 0.5f * 0.05f,
                 0f
             );
 
