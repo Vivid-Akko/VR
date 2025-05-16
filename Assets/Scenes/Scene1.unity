@@ -3774,9 +3774,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8bac4862bf088e44afe8e655f775588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftTriggerReference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f,
+  RightTriggerReference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
-  isLeftTriggerPressed: 0
+  isRightTriggerPressed: 0
 --- !u!4 &730850084
 Transform:
   m_ObjectHideFlags: 0

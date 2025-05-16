@@ -15,7 +15,7 @@ public class ChangeScene : MonoBehaviour
     void Start()
     {
         isRaycastHit = interactManager.GetComponent<RayInteractor>().isRaycastHit;
-        isTriggerPressed = interactManager.GetComponent<LeftTriggerByReference>().isLeftTriggerPressed;
+        isTriggerPressed = interactManager.GetComponent<RightTriggerByReference>().isRightTriggerPressed;
         
     }
 
@@ -23,7 +23,7 @@ public class ChangeScene : MonoBehaviour
     void Update()
     {
         isRaycastHit = interactManager.GetComponent<RayInteractor>().isRaycastHit;
-        isTriggerPressed = interactManager.GetComponent<LeftTriggerByReference>().isLeftTriggerPressed;
+        isTriggerPressed = interactManager.GetComponent<RightTriggerByReference>().isRightTriggerPressed;
         float distance = Vector3.Distance(player.transform.position, transform.position);
         if (distance < distanceCheck)
         {
