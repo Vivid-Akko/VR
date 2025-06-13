@@ -7,7 +7,14 @@ public class PaddleAnimation : MonoBehaviour
     public Transform paddleJoint;
     public float animationDuration = 1f;
 
+    public Transform paddlePosition;
     private float timer = 0f;
+
+    void Start()
+    {
+        paddleJoint.position = paddlePosition.position;
+
+    }
 
     void Update()
     {
